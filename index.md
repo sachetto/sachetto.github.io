@@ -8,6 +8,3 @@ Aqui você encontra meus processos de desenvolvimento, projetos e reflexões sob
 
 ---
 
-## Sobre Mim
-
-{% include_relative about_me.md %}
