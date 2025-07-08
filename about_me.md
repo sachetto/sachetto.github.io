@@ -1,3 +1,9 @@
+---
+layout: page
+title: About
+permalink: /about/
+---
+
 # Bem-vindo ao Meu Blog de Desenvolvimento
 
 Olá! Este blog é o meu espaço para compartilhar pensamentos, processos e ferramentas gratuitas relacionadas ao **desenvolvimento de software**. Vou escrever sobre minhas experiências criando software, compartilhar meus códigos e discutir como eu abordo a construção de projetos do zero.
