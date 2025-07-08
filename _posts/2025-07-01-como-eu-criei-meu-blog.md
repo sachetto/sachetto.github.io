@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "Como Eu Criei Meu Blog de Desenvolvimento Usando Jekyll, Docker e WSL"
@@ -138,18 +137,30 @@ Dentro do container:
    ```bash
    bundle exec jekyll serve --host 0.0.0.0
    ```
+   Pelo que eu entendi, por estar dentro do container o jekyll não consegue identificar que 
+   houveram mudanças nos arquivos do site. Desse modo, eu preciso parar o processo (ctrl+c)
+   e rodar o comando acima novamente para que as atualizações sejam refletidas na página.
+6. Caso você feche o container e o abra novamente, será necessário rodar:
+   ```bash
+   bundle install
+   bundle exec jekyll serve --host 0.0.0.0
+   ```
+7. **Passo extra:** Para não precisar ficar repetindo `bundle install` toda vez que rodasse
+   o container, eu coloquei o comando direto no *Dockerfile*. Mas para isso, precisou de mais
+   algumas modificações no docker file. Eu adicionei os comandos abaixo imediatamente antes do último comando.
+   ```Dokerfile
+   COPY sachetto.github.io/Gemfile sachetto.github.io/Gemfile.lock* ./
+   RUN bundle install
+   ```
+   Um detalhe aqui é, como ele precisa copiar os arquivos que estão no projeto da minha página, eu incluí 
+   a página como um submódulo do repositório onde guardei o *Dockerfile*, dai ficou fácil eu ter os 
+   arquivos.
+   Depois disso foi só buildar uma nova imagem.
 
 A página ficou acessível em:
 ```
 http://localhost:4000
 ```
-
----
-
-## ⚠️ Problema Inicial: Tema Sem Estilo Localmente
-
-Como o GitHub Pages carrega automaticamente os temas no ambiente online, localmente eu precisei instalar a gem `github-pages` para que o tema aparecesse corretamente.
-
 ---
 
 ## 📁 7. Publicando no GitHub Pages
@@ -158,7 +169,7 @@ Após testar tudo localmente, criei o repositório no GitHub, fiz o push da bran
 
 A URL ficou:
 ```
-https://seunomeusuario.github.io
+https://sachetto.github.io
 ```
 
 ---
